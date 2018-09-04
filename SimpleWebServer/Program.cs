@@ -23,7 +23,7 @@ namespace SimpleWebServer
 
             var webHost = CreateWebHostBuilder(args).Build();
 
-            string dataSource = config.GetValue<string>("DataSource:Source");
+            string dataSource = config.GetValue<string>("DataSource:Current");
 
             if (dataSource.Equals(Consts.Consts.SQLServer, StringComparison.OrdinalIgnoreCase))
             {
@@ -42,7 +42,7 @@ namespace SimpleWebServer
                 .ConfigureLogging((ctx, builder) =>
                 {
                     builder.AddConfiguration(ctx.Configuration.GetSection("Logging"));
-                    builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
+                    builder.AddFile(o => o.RootPath = Directory.GetCurrentDirectory());
                 })
                 .UseStartup<Startup>();
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -37,7 +38,7 @@ namespace SimpleWebServer
 
             services.AddAutoMapper();
 
-            string dataSource = Configuration.GetValue<string>("DataSource:Source");
+            string dataSource = Configuration.GetValue<string>("DataSource:Current");
 
             if (dataSource.Equals(Consts.Consts.SQLServer, StringComparison.OrdinalIgnoreCase))
             {
@@ -50,7 +51,7 @@ namespace SimpleWebServer
             else if (dataSource.Equals(Consts.Consts.LiteDb, StringComparison.OrdinalIgnoreCase))
             {
 
-                services.AddTransient<LiteDatabase>(opt => new LiteDatabase(Configuration.GetConnectionString("LiteDbConnection")));
+                services.AddTransient<LiteDatabase>(opt => new LiteDatabase($@"{Directory.GetCurrentDirectory()}\SimpleLiteDb.db"));
 
                 services.AddTransient<ISimpleMessageRepository, Repositories.NOSQL.SimpleMessageRepository>();
 
