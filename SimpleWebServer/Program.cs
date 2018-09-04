@@ -7,6 +7,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SimpleWebServer.Db.NOSQL;
+using SimpleWebServer.Db.SQL;
 
 namespace SimpleWebServer
 {
@@ -14,11 +16,34 @@ namespace SimpleWebServer
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false)
+                .Build();
+
+            var webHost = CreateWebHostBuilder(args).Build();
+
+            string dataSource = config.GetValue<string>("DataSource:Source");
+
+            if (dataSource.Equals(Consts.Consts.SQLServer, StringComparison.OrdinalIgnoreCase))
+            {
+                webHost.ApplyMigrationsOrCreateSQLDb();
+            }
+            else if (dataSource.Equals(Consts.Consts.LiteDb, StringComparison.OrdinalIgnoreCase))
+            {
+                webHost.CreateLiteDb();
+            }  
+            
+            webHost.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging((ctx, builder) =>
+                {
+                    builder.AddConfiguration(ctx.Configuration.GetSection("Logging"));
+                    builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
+                })
                 .UseStartup<Startup>();
     }
 }
