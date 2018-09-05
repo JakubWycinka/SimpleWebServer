@@ -45,19 +45,19 @@ namespace SimpleWebServer
 
                 services.AddDbContext<SimpleSQLServerDb>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection")));
 
-                services.AddTransient<ISimpleMessageRepository, Repositories.SQL.SimpleMessageRepository>();
+                services.AddScoped<ISimpleMessageRepository, Repositories.SQL.SimpleMessageRepository>();
 
             }
             else if (dataSource.Equals(Consts.Consts.LiteDb, StringComparison.OrdinalIgnoreCase))
             {
 
-                services.AddTransient<LiteDatabase>(opt => new LiteDatabase($@"{Directory.GetCurrentDirectory()}\SimpleLiteDb.db"));
+                services.AddScoped<LiteDatabase>(opt => new LiteDatabase($@"{Directory.GetCurrentDirectory()}\SimpleLiteDb.db"));
 
-                services.AddTransient<ISimpleMessageRepository, Repositories.NOSQL.SimpleMessageRepository>();
+                services.AddScoped<ISimpleMessageRepository, Repositories.NOSQL.SimpleMessageRepository>();
 
             }
 
-            services.AddTransient<ISimpleMessageService, SimpleMessageService>();
+            services.AddScoped<ISimpleMessageService, SimpleMessageService>();
             
         }
 

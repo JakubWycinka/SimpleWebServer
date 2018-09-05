@@ -1,0 +1,4 @@
+<app-message-form (addedMessage)="addMessage($event)"></app-message-form>
+<div *ngFor="let message of messages">
+    <app-simple-message [message]="message" (deletedMessage)="deletedMessage($event)"></app-simple-message>
+</div>

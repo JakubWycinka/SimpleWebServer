@@ -23,25 +23,25 @@ namespace SimpleWebServer.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            context.Request.EnableBuffering();
-
-            string requestAsString = await FormatRequest(context.Request);
+            string requestAsString = await ReadAndFormatRequest(context.Request);
 
             logger.LogInformation(requestAsString);            
 
             await next(context);
         }
 
-        private async Task<string> FormatRequest(HttpRequest request)
+        private async Task<string> ReadAndFormatRequest(HttpRequest request)
         {
+            request.EnableBuffering();
+
             var headers = request.Headers.Select(x => $"{x.Key}: {x.Value}");
             var headersAsString = string.Join(Environment.NewLine, headers);
 
-            string bodyAsString;
-            using (var reader = new StreamReader(request.Body))
-            {
-                bodyAsString = await reader.ReadToEndAsync();
-            }            
+            var reader = new StreamReader(request.Body);
+
+            string bodyAsString = await reader.ReadToEndAsync();
+
+            request.Body.Seek(0, SeekOrigin.Begin);
 
             return $"{request.Method} {request.Path} {request.Protocol}{Environment.NewLine}{headersAsString}{Environment.NewLine}{bodyAsString}";
         }
