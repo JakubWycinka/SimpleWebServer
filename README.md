@@ -19,7 +19,7 @@ The second application (frontend)
 
 # Backend
 
-This project was generated with [Visual Studio](https://www.visualstudio.com/en-us/downloads/) and uses [.Net Core 2.1](https://github.com/dotnet/core/blob/master/release-notes/2.1/2.1.3/2.1.3.md).
+This project was generated with [Visual Studio](https://www.visualstudio.com/en-us/downloads/) and uses [.Net Core 2.1](https://github.com/dotnet/core).
 
 ## Development server
 
