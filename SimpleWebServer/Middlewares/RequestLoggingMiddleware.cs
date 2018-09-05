@@ -23,6 +23,8 @@ namespace SimpleWebServer.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
+            context.Request.EnableBuffering();
+
             string requestAsString = await FormatRequest(context.Request);
 
             logger.LogInformation(requestAsString);            
@@ -32,8 +34,6 @@ namespace SimpleWebServer.Middlewares
 
         private async Task<string> FormatRequest(HttpRequest request)
         {
-            request.EnableBuffering();
-
             var headers = request.Headers.Select(x => $"{x.Key}: {x.Value}");
             var headersAsString = string.Join(Environment.NewLine, headers);
 

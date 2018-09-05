@@ -18,9 +18,9 @@ namespace SimpleWebServer.Db.NOSQL
             {
                 var context = scope.ServiceProvider.GetRequiredService<LiteDatabase>();
 
-                if (!context.CollectionExists(SimpleLiteDb.MessagesCollection))
+                if (!context.CollectionExists(LiteDbExtensions.MessagesCollection))
                 {
-                    var messagesCollection = context.GetCollection<SimpleMessage>(SimpleLiteDb.MessagesCollection);
+                    var messagesCollection = context.SimpleMessages();
 
                     messagesCollection.Insert(new SimpleMessage { AuthorName = "Jakub", Message = "This is sample message from NOSQL LiteDb." });
                 }
