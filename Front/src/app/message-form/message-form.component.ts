@@ -14,16 +14,17 @@ export class MessageFormComponent implements OnInit {
     message: '',
   };
 
-  @Output() addedMessage = new EventEmitter<SimpleMessageModel>();
+  @Output() afterPostedMessage = new EventEmitter<SimpleMessageModel>();
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
   }
 
-  post() {
+  postMessageApiCall() {
      this.apiService.postMessage(this.simpleMessage).subscribe(message => {
-      this.addedMessage.emit(message);
+       console.log('chuj');
+      this.afterPostedMessage.emit(message);
     });
   }
 

@@ -9,18 +9,18 @@ import { SimpleMessageModel } from '../models/message-model';
 })
 export class SimpleMessageComponent implements OnInit {
 
-  @Input() message: SimpleMessageModel;
+  @Input() simpleMessage: SimpleMessageModel;
 
-  @Output() deletedMessage = new EventEmitter<SimpleMessageModel>();
+  @Output() afterDeletedResponse = new EventEmitter<SimpleMessageModel>();
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
   }
 
-  delete() {
-    this.apiService.deleteMessage(this.message.id).subscribe(() => {
-      this.deletedMessage.emit(this.message);
+  deleteApiCall() {
+    this.apiService.deleteMessage(this.simpleMessage.id).subscribe(() => {
+      this.afterDeletedResponse.emit(this.simpleMessage);
     });
   }
 }

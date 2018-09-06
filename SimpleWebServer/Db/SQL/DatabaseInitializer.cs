@@ -22,6 +22,7 @@ namespace SimpleWebServer.Db.SQL
                 if (dbIsNewlyCreated)
                 {
                     context.SimpleMessages.Add(new SimpleMessage { AuthorName = "Jakub", Message = "This is sample message from SQL Server."});
+                    context.SaveChanges();
                 }
             }
 

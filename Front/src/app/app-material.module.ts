@@ -8,7 +8,7 @@ import {
   MatSliderModule, MatSlideToggleModule, MatSortModule, MatSnackBarModule, MatTableModule, MatTabsModule,
   MatTooltipModule, MatStepperModule
 } from '@angular/material';
-import {CdkTableModule} from "@angular/cdk/table";
+import {CdkTableModule} from '@angular/cdk/table';
 
 @NgModule({
   imports: [

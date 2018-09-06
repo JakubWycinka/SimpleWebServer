@@ -22,6 +22,7 @@ namespace SimpleWebServer.Repositories.SQL
         public async Task<SimpleMessage> Add(SimpleMessage simpleMessage)
         {
             var simpleMessageFromDb = await db.SimpleMessages.AddAsync(simpleMessage);
+            await db.SaveChangesAsync();
 
             return simpleMessageFromDb.Entity;
         }
@@ -31,6 +32,7 @@ namespace SimpleWebServer.Repositories.SQL
             var simpleMessage = await Get(id);
 
             db.SimpleMessages.Remove(simpleMessage);
+            await db.SaveChangesAsync();
         }
 
         public async Task<SimpleMessage> Get(int id)

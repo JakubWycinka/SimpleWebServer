@@ -1,4 +1,4 @@
-<app-message-form (addedMessage)="addMessage($event)"></app-message-form>
-<div *ngFor="let message of messages">
-    <app-simple-message [message]="message" (deletedMessage)="deletedMessage($event)"></app-simple-message>
+<app-message-form (afterPostedMessage)="addMessageToView($event)"></app-message-form>
+<div *ngFor="let simpleMessage of simpleMessages">
+    <app-simple-message [simpleMessage]="simpleMessage" (afterDeletedResponse)="removeMessageFromView($event)"></app-simple-message>
 </div>

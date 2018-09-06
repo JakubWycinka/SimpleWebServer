@@ -9,21 +9,22 @@ import { SimpleMessageModel } from '../models/message-model';
 })
 export class SimpleMessagesComponent implements OnInit {
 
-  messages: SimpleMessageModel[] = [];
+  simpleMessages: SimpleMessageModel[] = [];
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.apiService.getMessages()
-      .subscribe((messages: SimpleMessageModel[]) => {
-        this.messages = messages;
+    this.apiService.getMessages().subscribe((simpleMessages: SimpleMessageModel[]) => {
+        this.simpleMessages = simpleMessages;
       });
   }
 
-  addMessage(simpleMessage: SimpleMessageModel) {
-    this.messages.push(simpleMessage);
+  addMessageToView(simpleMessage: SimpleMessageModel) {
+    console.log('dupa');
+    this.simpleMessages.push(simpleMessage);
   }
 
-  deletedMessage(simpleMessage: SimpleMessageModel) {
-    this.messages.splice(this.messages.indexOf(simpleMessage),  1);
+  removeMessageFromView(simpleMessage: SimpleMessageModel) {
+    this.simpleMessages.splice(this.simpleMessages.indexOf(simpleMessage),  1);
   }
+}
