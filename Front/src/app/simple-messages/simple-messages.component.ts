@@ -20,7 +20,6 @@ export class SimpleMessagesComponent implements OnInit {
   }
 
   addMessageToView(simpleMessage: SimpleMessageModel) {
-    console.log('dupa');
     this.simpleMessages.push(simpleMessage);
   }
 

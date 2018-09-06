@@ -23,7 +23,6 @@ export class MessageFormComponent implements OnInit {
 
   postMessageApiCall() {
      this.apiService.postMessage(this.simpleMessage).subscribe(message => {
-       console.log('chuj');
       this.afterPostedMessage.emit(message);
     });
   }
