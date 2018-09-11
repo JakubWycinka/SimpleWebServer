@@ -23,7 +23,7 @@ This project was generated with [Visual Studio](https://www.visualstudio.com/en-
 
 ## Development server
 
-Application uses [Kestrel](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/?tabs=aspnetcore2x#kestrel) as a web server, [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) as a SQL data source, to use SQL Server provide proper `connection string` in `application.json` and give permission to create database.
+Application uses [Kestrel](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/?tabs=aspnetcore2x#kestrel) as a web server, [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) as a SQL data source (to use SQL Server provide proper `connection string` in `application.json` and give permission to create database)
 and [LiteDb](http://www.litedb.org/) as a NOSQL data source.
 
 To run application with [Visual Studio](https://www.visualstudio.com/en-us/downloads/) press "Run" button. 
